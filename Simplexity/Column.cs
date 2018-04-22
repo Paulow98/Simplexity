@@ -8,6 +8,7 @@ namespace Simplexity
 {
     class Column
     {
+
         private Stack<Piece> pieces = new Stack<Piece>();
 
 
