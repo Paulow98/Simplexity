@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simplexity
 {
+    /** */
     class Player
     {
         private Color color;
@@ -15,7 +16,7 @@ namespace Simplexity
         public bool shapeC;
 
         private GameManager gm;
-
+        /** Propertys that are read and write. */
         public int RoundPieces { get { return this.roundPieces; } set { this.roundPieces = value; } }
         public int SquarePieces { get { return this.squarePieces; } set { this.squarePieces = value; } }
         public Color Color { get { return this.color; } }
@@ -35,7 +36,7 @@ namespace Simplexity
             this.roundPieces = 10;
             this.squarePieces = 11;
         }
-       
+       /** Handles the user's input when selecting the row and what piece to place. */
         public bool Play(Column[] col)
         {
             bool pressedEnter = false;
