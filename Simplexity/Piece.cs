@@ -15,13 +15,13 @@ namespace Simplexity
         private Color color;
         /** Variable that will hold the shape of said piece. */
         private Shape shape;
-        /** Function that will enable the change of said piece's properties. */
+        /** Method that will enable the change of said piece's properties. */
         public Piece(Color color, Shape shape)
         {
             this.color = color;
             this.shape = shape;
         }
-        /** Function that will clear the properties of said piece. */
+        /** Method that will clear the properties of said piece. */
         public Piece()
         {
             this.color = Color.None;

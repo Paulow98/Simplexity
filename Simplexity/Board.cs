@@ -8,9 +8,10 @@ namespace Simplexity
 {
     class Board
     {
+        /** Create variables that will be used later on. */
         public int posC = 0;
         public bool shapeC = false;
-
+        /** Sets the GameManager. */
         private GameManager gm;
         Column[] columns = new Column[7] { new Column(), new Column(),
                                            new Column(), new Column(),
@@ -21,7 +22,7 @@ namespace Simplexity
         {
             this.gm = gm;
         }
-        //checks the win condition at the horizontal
+        /** Checks the win condition in the Horizontal. */
         public bool CheckHorizontal(int row)
         {
             int c, s;
@@ -44,7 +45,7 @@ namespace Simplexity
             else
                 return false;
         }
-        //checks the win condition at the diagonals
+        /** Checks the win conditional on the diagonal. */
         public bool CheckDiagonal(int col, int row)
         {
             Piece previousPiece = new Piece();
@@ -95,7 +96,7 @@ namespace Simplexity
                 return false;
         }
 
-        //function that draws the board
+        /** Function that draws the board. */
         public void Draw()
         {
             Console.Clear();
@@ -154,7 +155,7 @@ namespace Simplexity
             Console.WriteLine("   " + "---------------");
             Console.WriteLine("  " + "Playing: Player " + (gm.CurrentPlayer + 1));
         }
-        //function that checks if the win condition has been reached
+        /** Function that check if the win conditions have been meet from the past functions. */
         public bool CheckForWin()
         {
             int playerN = (gm.CurrentPlayer == 0) ? 2 : 1;

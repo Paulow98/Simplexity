@@ -8,21 +8,20 @@ namespace Simplexity
 {
     class Column
     {
-
+        /** Creates the stack we will use later on. */
         private Stack<Piece> pieces = new Stack<Piece>();
 
-
+        /** Method to get a specific piece */
         public Piece GetPiece(int pos)
         {
             return pieces.ElementAt(pos);
-           
         }
-        //places a piece at the top of the stack
+        /** Places a piece on top of the stack. */
         public void PlacePiece(Piece p)
         {
             pieces.Push(p); 
         }
-        //checks if someone won at the column in the column
+        /** Checks if someone has won on a specific column. */
         public bool Check()
         {
             // c:Color, s:Shape
@@ -52,7 +51,7 @@ namespace Simplexity
             return result;
         }
 
-        //converts the stack to array
+        /** Converts a stack into an array */
         public Piece[] ToArray()
         {
             Piece[] tmp = new Piece[7] { new Piece(), new Piece(),
@@ -63,7 +62,7 @@ namespace Simplexity
             pieces.CopyTo(tmp, tmp.Length - pieces.Count);
             return InvertArray(tmp);
         }
-        // invert the position of the elements of the array
+        /** Inverts the position of the elements of the array. */
         private Piece[] InvertArray(Piece[] a)
         {
             Piece[] tmp1 = new Piece[a.Length];

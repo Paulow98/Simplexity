@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simplexity
 {
+    /** PlaceHolder Class. */
     public class InputManager
     {
         public void ManageInputs()
