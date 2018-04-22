@@ -10,8 +10,7 @@ namespace Simplexity
     {
         public int posC = 0;
         public bool shapeC = false;
-        //public int PosC { get { return this.posC; } set { this.posC = value; } }
-        //public bool ShapeC { get { return this.ShapeC; } set { this.ShapeC = value; } }
+
         private GameManager gm;
         Column[] columns = new Column[7] { new Column(), new Column(),
                                            new Column(), new Column(),
@@ -22,12 +21,13 @@ namespace Simplexity
         {
             this.gm = gm;
         }
-        public bool checkHorizontal(int row)
+        //checks the win condition at the horizontal
+        public bool CheckHorizontal(int row)
         {
             int c, s;
             c = s = 1;
             Piece previousPiece = new Piece();
-            for(int i = 0; i<7;i++)
+            for (int i = 0; i < 7; i++)
             {
                 if (previousPiece.Color == columns[i].ToArray()[row].Color && columns[i].ToArray()[row].Color != Color.None)
                     c++;
@@ -38,12 +38,14 @@ namespace Simplexity
                 else
                     s = 1;
             }
+            Console.WriteLine("C: " + c + " S: " + s);
             if (s >= 4 || c >= 4)
                 return true;
             else
                 return false;
         }
-        public bool checkDiagonal(int col, int row)
+        //checks the win condition at the diagonals
+        public bool CheckDiagonal(int col, int row)
         {
             Piece previousPiece = new Piece();
             int c, s;
@@ -86,16 +88,18 @@ namespace Simplexity
                     s = 1;
                 tmpRow++;
             }
+            Console.WriteLine("C: " + c + " S: " + s);
             if (s >= 4 || c >= 4)
                 return true;
             else
                 return false;
         }
-       
+
         //function that draws the board
         public void Draw()
         {
             Console.Clear();
+            Console.WriteLine();
             string tmpString = null;
             for (int i = 0; i < posC; i++)
             {
@@ -103,10 +107,19 @@ namespace Simplexity
             }
             if (shapeC)
             {
-                Console.WriteLine(tmpString + "w");
+                if (gm.CurrentPlayerColor == Color.White)
+                    Console.WriteLine("    " + tmpString + "w");
+                else
+                    Console.WriteLine("    " + tmpString + "r");
             }
             else
-                Console.WriteLine(tmpString + "W");
+            {
+                if (gm.CurrentPlayerColor == Color.White)
+                    Console.WriteLine("    " + tmpString + "W");
+                else
+                    Console.WriteLine("    " + tmpString + "R");
+            }
+            Console.Write("    ");
             Console.WriteLine(tmpString += "v");
             Piece[] tmpPieces = new Piece[7];
             int tmpInt = 6;
@@ -136,17 +149,32 @@ namespace Simplexity
                     }
                 }
                 tmpInt--;
-                Console.WriteLine(tmpString);
+                Console.WriteLine("    " + tmpString);
             }
+            Console.WriteLine("   " + "---------------");
+            Console.WriteLine("  " + "Playing: Player " + (gm.CurrentPlayer + 1));
         }
-
-        public void Update()
+        //function that checks if the win condition has been reached
+        public bool CheckForWin()
         {
+            int playerN = (gm.CurrentPlayer == 0) ? 2 : 1;
             foreach (Column c in columns)
             {
-                if (c.Check(Color.White))
-                    Console.WriteLine("TRUE");
+                if (c.Check())
+                {
+                    Console.WriteLine($"Player {playerN} won!");
+                    return true;
+                }       
             }
+            for (int i = 0; i < 7; i++)
+            {
+                if (CheckHorizontal(i))
+                {
+                    Console.WriteLine($"Player {playerN} won!");
+                    return true;
+                }
+            }
+            return false;
         }
 
     }
